@@ -1,0 +1,127 @@
+
+
+//MMM-learnlanguage.js:
+
+Module.register("MMM-learnlanguage",{
+	// Default module config.
+	defaults: {
+                nextWordInterval: 90000, //interval to fetch a new wordpair
+		language : "swedish", //name of csv file without extension
+                text: "vertalen",
+                translatedtext : "translate",
+	},
+
+      	// Define required translations.
+	//getTranslations: function() {
+       	//	return {
+        //    		en: "translations/en.json",
+        //    		nl: "translations/nl.json",
+        //	};
+	//},
+
+
+	// Define start sequence.
+	start: function() {
+		Log.info("Starting module: " + this.name);
+		this.scheduleUpdate();
+
+       	},
+
+	toOrFrom: function() {
+		this.sendSocketNotification('TO-OR-FROM', this.config);
+	},
+
+	// Process Data that was read from the file.
+	processData: function(data) {
+		// convert our data from the file into an array
+		var lines = data.replace(/\n+$/, "").split("\n");
+		var numLines = lines.length-1;
+		this.foreignl = [];
+		this.ownl = [];
+
+                for (i=0;i<numLines; i++) {
+                    var line = lines[i];
+	            var semicolonIndex = line.indexOf(';');
+	            f = line.substring(0, semicolonIndex);
+	            o = line.substring(semicolonIndex+1, line.length);
+
+                    this.foreignl.push(f);
+                    this.ownl.push(o);
+                }
+
+
+		this.loaded = true;
+		x = Math.floor(Math.random() * numLines);
+		this.config.text = this.ownl[x];
+		this.config.translatedtext = this.foreignl[x];
+		var self = this;
+		setInterval(function(){
+			self.toOrFrom()
+			}, 3000);
+	},
+
+	// getWord from the file
+	getWord: function() {
+		var self = this;
+
+		var xobj = new XMLHttpRequest();
+		xobj.open("GET", this.file("languagefiles/"+this.config.language+".csv"), true);
+   		xobj.onreadystatechange = function () {
+			if (xobj.readyState == 4 && xobj.status == "200") {
+				self.processData(xobj.response);
+			}
+		};
+		xobj.send();
+
+	},
+
+	scheduleUpdate: function(delay) {
+		var nextWord = this.config.nextWordInterval;
+		if (typeof delay !== "undefined" && delay >= 0) {
+			nextWord = delay;
+		}
+
+		var self = this;
+		self.getWord();
+		setTimeout(function(){
+			self.scheduleUpdate()
+			},nextWord);
+	},
+
+        // Override dom generator.
+        getDom: function() {
+                var wrapper = document.getElementById('wordpair');
+                if (!wrapper) {
+		    wrapper = document.createElement("div");
+		    wrapper.className = "bright";
+		    wrapper.id = "wordpair";
+                }
+                return wrapper;
+        },
+
+        getHeader: function() {
+	        return this.translate("LEARN " + this.config.language);
+        },
+	/* socketNotificationReceive(notification)
+	 * used to get communication from the nodehelper
+	 *
+	 * argument notification object - status label from nodehelper.
+	 */
+       	socketNotificationReceived: function(notification, payload) {
+
+                tofrom = document.getElementById('wordpair');
+
+		if(notification === "LEFT") {
+			tofrom.innerHTML = "<span style='visibility:visible'>"+ payload + "</span>";
+                        tofrom.innerHTML += "<span style='visibility:hidden'>"+ payload + "</span>";
+              	}
+		if(notification === "RIGHT"){
+                        tofrom.innerHTML = "<span style='visibility:hidden'>"+ payload + "</span>";
+                        tofrom.innerHTML += "<span style='visibility:visible'>"+ payload + "</span>";
+                }
+
+		this.updateDom();
+
+    	}
+
+});
