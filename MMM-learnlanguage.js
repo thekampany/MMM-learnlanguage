@@ -9,6 +9,7 @@ Module.register("MMM-learnlanguage",{
 		language : "swedish", //name of csv file without extension
                 text: "vertalen",
                 translatedtext : "translate",
+                showpair: "alternating", //alternating or showboth
 	},
 
       	// Define required translations.
@@ -30,6 +31,10 @@ Module.register("MMM-learnlanguage",{
 	toOrFrom: function() {
 		this.sendSocketNotification('TO-OR-FROM', this.config);
 	},
+
+        toAndFrom: function() {
+                this.sendSocketNotification('TO-AND-FROM', this.config);
+        },
 
 	// Process Data that was read from the file.
 	processData: function(data) {
@@ -55,9 +60,17 @@ Module.register("MMM-learnlanguage",{
 		this.config.text = this.ownl[x];
 		this.config.translatedtext = this.foreignl[x];
 		var self = this;
-		setInterval(function(){
+
+                if (this.config.showpair === "showboth") {
+                      setInterval(function(){
+                        self.toAndFrom()
+                        }, 3000);
+                }
+                else {
+		      setInterval(function(){
 			self.toOrFrom()
 			}, 3000);
+                }
 	},
 
 	// getWord from the file
@@ -118,6 +131,10 @@ Module.register("MMM-learnlanguage",{
 		if(notification === "RIGHT"){
                         tofrom.innerHTML = "<span style='visibility:hidden'>"+ payload + "</span>";
                         tofrom.innerHTML += "<span style='visibility:visible'>"+ payload + "</span>";
+                }
+
+                if(notification === "BOTH"){
+                        tofrom.innerHTML = payload;
                 }
 
 		this.updateDom();

@@ -46,7 +46,11 @@ module.exports = NodeHelper.create({
 
 	socketNotificationReceived: function(notification, payload) {
 		var self = this;
-
+                if (notification === 'TO-AND-FROM') {
+                   self.config  = payload;
+                   var wordpair = self.config.text + " - " + self.config.translatedtext;
+                   self.sendSocketNotification("BOTH", wordpair);
+                }
 		if (notification === 'TO-OR-FROM') {
 			self.config = payload;
 			//console.log(self.config);
