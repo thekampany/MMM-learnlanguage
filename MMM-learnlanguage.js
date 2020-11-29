@@ -1,5 +1,6 @@
 
 
+
 //MMM-learnlanguage.js:
 
 Module.register("MMM-learnlanguage",{
@@ -39,7 +40,8 @@ Module.register("MMM-learnlanguage",{
 	// Process Data that was read from the file.
 	processData: function(data) {
 		// convert our data from the file into an array
-		var lines = data.replace(/\n+$/, "").split("\n");
+                var datautf8 = JSON.parse( JSON.stringify( data ) )
+		var lines = datautf8.replace(/\n+$/, "").split("\n");
 		var numLines = lines.length-1;
 		this.foreignl = [];
 		this.ownl = [];
