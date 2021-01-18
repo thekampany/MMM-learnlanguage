@@ -11,6 +11,7 @@ Module.register("MMM-learnlanguage",{
                 text: "vertalen",
                 translatedtext : "translate",
                 showpair: "alternating", //alternating or showboth
+                wordpaircssclassname: "bright xlarge",
 	},
 
       	// Define required translations.
@@ -108,7 +109,7 @@ Module.register("MMM-learnlanguage",{
                 var wrapper = document.getElementById('wordpair');
                 if (!wrapper) {
 		    wrapper = document.createElement("div");
-		    wrapper.className = "bright";
+		    wrapper.className = this.config.wordpaircssclassname;
 		    wrapper.id = "wordpair";
                 }
                 return wrapper;
