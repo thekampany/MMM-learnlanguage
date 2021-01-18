@@ -19,6 +19,7 @@ The set of commonly used words is stored in a csv file per language.
 <tr><td>language</td><td>language: spanish, swedish. has to match the name of the csv file that contains the wordpairs.</td></tr>
 <tr><td>nextWordInterval</td><td>In miliseconds. The interval between wordpairs. One word per day = 24*3600*1000. Two words per day is 12*3600*1000</td></tr>
 <tr><td>showpair</td><td>showboth or alternating</td></tr>
+<tr><td>wordpaircssclassname</td><td>influences the fontsize, uses the css from main.css</td></tr>
 </table>
 
 ## Example configuration to put in config.js
@@ -29,8 +30,9 @@ The set of commonly used words is stored in a csv file per language.
 			language: "spanish",
 			nextWordInterval: 90000, 
                         showpair: "showboth",
-	  	}
-  	},
+                        wordpaircssclassname: "bright medium",
+                        }
+    },
 
 ## ToDo
 Use a translation api in order to be able to translate from any to any language.
