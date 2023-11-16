@@ -77,19 +77,19 @@ Module.register("MMM-learnlanguage",{
 	},
 
 	// getWord from the file
-	getWord: function() {
-		var self = this;
+  getWord: async function () {
+    const response = await fetch(
+      this.file(`languagefiles/${this.config.language}.csv`)
+    );
 
-		var xobj = new XMLHttpRequest();
-		xobj.open("GET", this.file("languagefiles/"+this.config.language+".csv"), true);
-   		xobj.onreadystatechange = function () {
-			if (xobj.readyState == 4 && xobj.status == "200") {
-				self.processData(xobj.response);
-			}
-		};
-		xobj.send();
-
-	},
+    if (response.status === 200) {
+      const data = await response.text();
+      let self = this;
+      self.processData(data);
+    } else {
+      throw new Error("Failed to fetch language file.");
+    }
+  },
 
 	scheduleUpdate: function(delay) {
 		var nextWord = this.config.nextWordInterval;
