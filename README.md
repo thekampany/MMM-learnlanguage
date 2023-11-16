@@ -21,12 +21,12 @@ The set of commonly used words is stored in a csv file per language.
 
 ## Config options
 
-| option                 | description                                                                                                                                                    |
-| ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `language`             | `"danish"`, `"frisian"`, `"german"`, `"italian"`, `"japanese"`, `"spanish"` or `"swedish"`. Has to match the name of the CSV file that contains the wordpairs. |
-| `nextWordInterval`     | In miliseconds. The interval between wordpairs. One word per day = `24*3600*1000`. Two words per day is `12*3600*1000`.                                        |
-| `showpair`             | `"showboth"` or `"alternating"`                                                                                                                                |
-| `wordpaircssclassname` | Influences the fontsize, uses the CSS from main CSS.                                                                                                           |
+| option                 | description                                                                                                                                                                  |
+| ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `language`             | `"danish"`, `"esperanto"`,`"frisian"`, `"german"`, `"italian"`, `"japanese"`, `"spanish"` or `"swedish"`. Has to match the name of the CSV file that contains the wordpairs. |
+| `nextWordInterval`     | In miliseconds. The interval between wordpairs. One word per day = `24*3600*1000`. Two words per day is `12*3600*1000`.                                                      |
+| `showpair`             | `"showboth"` or `"alternating"`                                                                                                                                              |
+| `wordpaircssclassname` | Influences the fontsize, uses the CSS from main CSS.                                                                                                                         |
 
 ## Example configuration to put in config.js
 
