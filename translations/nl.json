@@ -1,12 +1,8 @@
-
 {
-    "STARTING": "Starting",
-    "STARTED": "Started",
-    "NODATA": "No data received",
-    "ERROR": "No connection",
-    "NORAIN": "No rain until",
-    "UMBRELLA": "Do I need an umbrella?"
+  "STARTING": "Starting",
+  "STARTED": "Started",
+  "NODATA": "No data received",
+  "ERROR": "No connection",
+  "NORAIN": "No rain until",
+  "UMBRELLA": "Do I need an umbrella?"
 }
-
-  
-
