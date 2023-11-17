@@ -44,14 +44,13 @@ Module.register("MMM-learnlanguage", {
     this.foreignl = [];
     this.ownl = [];
 
-    for (let i = 0; i < numLines; i++) {
-      const line = lines[i];
+    for (const line of lines) {
       const semicolonIndex = line.indexOf(";");
-      const f = line.substring(0, semicolonIndex);
-      const o = line.substring(semicolonIndex + 1, line.length);
+      const foreigWord = line.substring(0, semicolonIndex);
+      const ownWord = line.substring(semicolonIndex + 1, line.length);
 
-      this.foreignl.push(f);
-      this.ownl.push(o);
+      this.foreignl.push(foreigWord);
+      this.ownl.push(ownWord);
     }
 
     this.loaded = true;
