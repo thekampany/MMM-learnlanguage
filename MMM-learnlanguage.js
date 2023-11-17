@@ -37,35 +37,33 @@ Module.register("MMM-learnlanguage", {
 
   // Process Data that was read from the file.
   processData(data) {
-    // convert our data from the file into an array
-    const datautf8 = JSON.parse(JSON.stringify(data));
-    const lines = datautf8.replace(/\n+$/, "").split("\n");
-    const numLines = lines.length - 1;
+    // Split the data into lines
+    const lines = data.replace(/\n+$/, "").split("\n");
+
     this.foreignl = [];
     this.ownl = [];
 
     for (const line of lines) {
       const semicolonIndex = line.indexOf(";");
-      const foreigWord = line.substring(0, semicolonIndex);
+      const foreignWord = line.substring(0, semicolonIndex);
       const ownWord = line.substring(semicolonIndex + 1, line.length);
 
-      this.foreignl.push(foreigWord);
+      this.foreignl.push(foreignWord);
       this.ownl.push(ownWord);
     }
 
     this.loaded = true;
-    const x = Math.floor(Math.random() * numLines);
+    const x = Math.floor(Math.random() * lines.length);
     this.config.text = this.ownl[x];
     this.config.translatedtext = this.foreignl[x];
-    const self = this;
 
     if (this.config.showpair === "showboth") {
-      setInterval(function () {
-        self.toAndFrom();
+      setInterval(() => {
+        this.toAndFrom();
       }, 3000);
     } else {
-      setInterval(function () {
-        self.toOrFrom();
+      setInterval(() => {
+        this.toOrFrom();
       }, 3000);
     }
   },
