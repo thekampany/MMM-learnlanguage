@@ -5,31 +5,30 @@
 const NodeHelper = require("node_helper");
 
 module.exports = NodeHelper.create({
-  start: function () {
+  start() {
     this.started = false;
     this.config = null;
   },
 
-  socketNotificationReceived: function (notification, payload) {
-    let self = this;
+  socketNotificationReceived(notification, payload) {
+    const self = this;
     if (notification === "TO-AND-FROM") {
       self.config = payload;
-      let wordpair = `${self.config.text} - ${self.config.translatedtext}`;
+      const wordpair = `${self.config.text} - ${self.config.translatedtext}`;
       self.sendSocketNotification("BOTH", wordpair);
     }
     if (notification === "TO-OR-FROM") {
       self.config = payload;
-      //console.log(self.config);
-      let d = new Date();
-      let n = d.getSeconds();
+      // console.log(self.config);
+      const d = new Date();
+      const n = d.getSeconds();
+      self.started = true;
       if (n > 30) {
         self.sendSocketNotification("RIGHT", self.config.text);
-        self.started = true;
-        //console.log(self.name + ": rightconfigured");
+        // console.log(self.name + ": rightconfigured");
       } else {
         self.sendSocketNotification("LEFT", self.config.translatedtext);
-        self.started = true;
-        //console.log(self.name + ": leftconfigured");
+        // console.log(self.name + ": leftconfigured");
       }
     }
   }

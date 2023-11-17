@@ -14,51 +14,51 @@ Module.register("MMM-learnlanguage", {
   },
 
   // Define required translations.
-  //getTranslations: function() {
+  // getTranslations: function() {
   //	return {
   //    		en: "translations/en.json",
   //    		nl: "translations/nl.json",
   //	};
-  //},
+  // },
 
   // Define start sequence.
-  start: function () {
+  start() {
     Log.info(`Starting module: ${this.name}`);
     this.scheduleUpdate();
   },
 
-  toOrFrom: function () {
+  toOrFrom() {
     this.sendSocketNotification("TO-OR-FROM", this.config);
   },
 
-  toAndFrom: function () {
+  toAndFrom() {
     this.sendSocketNotification("TO-AND-FROM", this.config);
   },
 
   // Process Data that was read from the file.
-  processData: function (data) {
+  processData(data) {
     // convert our data from the file into an array
-    let datautf8 = JSON.parse(JSON.stringify(data));
-    let lines = datautf8.replace(/\n+$/, "").split("\n");
-    let numLines = lines.length - 1;
+    const datautf8 = JSON.parse(JSON.stringify(data));
+    const lines = datautf8.replace(/\n+$/, "").split("\n");
+    const numLines = lines.length - 1;
     this.foreignl = [];
     this.ownl = [];
 
     for (let i = 0; i < numLines; i++) {
-      let line = lines[i];
-      let semicolonIndex = line.indexOf(";");
-      let f = line.substring(0, semicolonIndex);
-      let o = line.substring(semicolonIndex + 1, line.length);
+      const line = lines[i];
+      const semicolonIndex = line.indexOf(";");
+      const f = line.substring(0, semicolonIndex);
+      const o = line.substring(semicolonIndex + 1, line.length);
 
       this.foreignl.push(f);
       this.ownl.push(o);
     }
 
     this.loaded = true;
-    let x = Math.floor(Math.random() * numLines);
+    const x = Math.floor(Math.random() * numLines);
     this.config.text = this.ownl[x];
     this.config.translatedtext = this.foreignl[x];
-    let self = this;
+    const self = this;
 
     if (this.config.showpair === "showboth") {
       setInterval(function () {
@@ -72,7 +72,7 @@ Module.register("MMM-learnlanguage", {
   },
 
   // getWord from the file
-  getWord: async function () {
+  async getWord() {
     const response = await fetch(
       this.file(`languagefiles/${this.config.language}.csv`)
     );
@@ -85,13 +85,13 @@ Module.register("MMM-learnlanguage", {
     }
   },
 
-  scheduleUpdate: function (delay) {
+  scheduleUpdate(delay) {
     let nextWord = this.config.nextWordInterval;
     if (typeof delay !== "undefined" && delay >= 0) {
       nextWord = delay;
     }
 
-    let self = this;
+    const self = this;
     self.getWord();
     setTimeout(function () {
       self.scheduleUpdate();
@@ -99,7 +99,7 @@ Module.register("MMM-learnlanguage", {
   },
 
   // Override dom generator.
-  getDom: function () {
+  getDom() {
     let wrapper = document.getElementById("wordpair");
     if (!wrapper) {
       wrapper = document.createElement("div");
@@ -109,7 +109,7 @@ Module.register("MMM-learnlanguage", {
     return wrapper;
   },
 
-  getHeader: function () {
+  getHeader() {
     return this.translate(`LEARN ${this.config.language}`);
   },
   /* socketNotificationReceive(notification)
@@ -117,8 +117,8 @@ Module.register("MMM-learnlanguage", {
    *
    * argument notification object - status label from nodehelper.
    */
-  socketNotificationReceived: function (notification, payload) {
-    let tofrom = document.getElementById("wordpair");
+  socketNotificationReceived(notification, payload) {
+    const tofrom = document.getElementById("wordpair");
 
     if (notification === "LEFT") {
       tofrom.innerHTML = `<span style='visibility:visible'>${payload}</span>`;
