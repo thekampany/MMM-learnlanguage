@@ -120,18 +120,13 @@ Module.register("MMM-learnlanguage", {
     const tofrom = document.getElementById("wordpair");
 
     if (notification === "LEFT") {
-      tofrom.innerHTML = `<span style='visibility:visible'>${payload}</span>`;
-      tofrom.innerHTML += `<span style='visibility:hidden'>${payload}</span>`;
-    }
-    if (notification === "RIGHT") {
-      tofrom.innerHTML = `<span style='visibility:hidden'>${payload}</span>`;
-      tofrom.innerHTML += `<span style='visibility:visible'>${payload}</span>`;
-    }
-
-    if (notification === "BOTH") {
+      tofrom.innerHTML = `<span style='visibility:visible'>${payload}</span>
+                          <span style='visibility:hidden'>${payload}</span>`;
+    } else if (notification === "RIGHT") {
+      tofrom.innerHTML = `<span style='visibility:hidden'>${payload}</span>
+                          <span style='visibility:visible'>${payload}</span>`;
+    } else if (notification === "BOTH") {
       tofrom.innerHTML = payload;
     }
-
-    this.updateDom();
   }
 });

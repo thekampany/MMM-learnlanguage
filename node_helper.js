@@ -16,8 +16,7 @@ module.exports = NodeHelper.create({
       self.config = payload;
       const wordpair = `${self.config.text} - ${self.config.translatedtext}`;
       self.sendSocketNotification("BOTH", wordpair);
-    }
-    if (notification === "TO-OR-FROM") {
+    } else if (notification === "TO-OR-FROM") {
       self.config = payload;
       // console.log(self.config);
       const d = new Date();
