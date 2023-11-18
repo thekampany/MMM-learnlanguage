@@ -1,12 +1,11 @@
-
 {
-    "STARTING": "Starting",
-    "STARTED": "Started",
-    "NODATA": "No data received",
-    "ERROR": "No connection",
-    "NORAIN": "No rain until",
-    "UMBRELLA": "Do I need an umbrella?"
+  "LEARN": "Learn",
+  "danish": "danish",
+  "esperanto": "esperanto",
+  "frisian": "frisian",
+  "german": "german",
+  "italian": "italian",
+  "japanese": "japanese",
+  "spanish": "spanish",
+  "swedish": "swedish"
 }
-
-
-

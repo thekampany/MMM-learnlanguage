@@ -1,0 +1,20 @@
+{
+  "name": "mmm-learnlanguage",
+  "version": "1.0.0",
+  "description": "MagicMirror² module for learning a word every time you look in the mirror.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/thekampany/MMM-learnlanguage"
+  },
+  "keywords": [
+    "magic mirror",
+    "learn",
+    "language",
+    "vocabulary"
+  ],
+  "author": {
+    "name": "thekampany",
+    "url": "https://github.com/thekampany"
+  },
+  "license": "ISC"
+}
