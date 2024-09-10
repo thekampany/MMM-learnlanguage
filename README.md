@@ -23,7 +23,7 @@ The set of commonly used words is stored in a CSV file per language.
 
 | option                 | description                                                                                                                                                                  |
 | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `language`             | `"danish"`, `"esperanto"`,`"frisian"`, `"german"`, `"italian"`, `"japanese"`, `"spanish"` or `"swedish"`. Has to match the name of the CSV file that contains the wordpairs. |
+| `language`             | `"danish"`, `"esperanto"`, `"french"`, `"frisian"`, `"german"`, `"italian"`, `"japanese"`, `"spanish"` or `"swedish"`. Has to match the name of the CSV file that contains the wordpairs. |
 | `nextWordInterval`     | In miliseconds. The interval between wordpairs.<br>Example: `24*60*60*1000` (eyery 24 hours).<br>Default: `12*60*60*1000` (every 12 hours).                                  |
 | `showpair`             | `"showboth"` or `"alternating"`<br>Default: `alternating`                                                                                                                    |
 | `toggleInterval`       | In miliseconds. Toggle time between own language word and foreign language word.<br>Only relevant if `"showpair": "alternating"`.<br>Default: `10*1000` (every 10 seconds).  |
@@ -50,7 +50,7 @@ Here are two examples for an entry in `config.js`:
   },
 ```
 
-### Two instaces with alternating words
+### Two instances with alternating words
 
 If multiple languages are learned in your household, you can also run multiple instances of the module by adding the module settings multiple times into the `config.js`.
 
