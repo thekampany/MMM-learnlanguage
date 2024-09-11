@@ -24,10 +24,11 @@ The set of commonly used words is stored in a CSV file per language.
 | option                 | description                                                                                                                                                                  |
 | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `language`             | `"danish"`, `"esperanto"`, `"french"`, `"frisian"`, `"german"`, `"italian"`, `"japanese"`, `"spanish"` or `"swedish"`. Has to match the name of the CSV file that contains the wordpairs. |
-| `nextWordInterval`     | In miliseconds. The interval between wordpairs.<br>Example: `24*60*60*1000` (eyery 24 hours).<br>Default: `12*60*60*1000` (every 12 hours).                                  |
+| `nextWordInterval`     | In milliseconds. The interval between wordpairs.<br>Example: `24*60*60*1000` (eyery 24 hours).<br>Default: `12*60*60*1000` (every 12 hours).                                 |
 | `showpair`             | `"showboth"` or `"alternating"`<br>Default: `alternating`                                                                                                                    |
-| `toggleInterval`       | In miliseconds. Toggle time between own language word and foreign language word.<br>Only relevant if `"showpair": "alternating"`.<br>Default: `10*1000` (every 10 seconds).  |
+| `toggleInterval`       | In milliseconds. Toggle time between own language word and foreign language word.<br>Only relevant if `"showpair": "alternating"`.<br>Default: `10*1000` (every 10 seconds). |
 | `wordpaircssclassname` | Influences the fontsize, uses the CSS from main CSS.                                                                                                                         |
+| `showHeader`           | Display header and horizontal rule above wordpairs.<br>Default: `true`                                                                                                       |
 
 ## Configuration
 
@@ -35,7 +36,7 @@ Here are two examples for an entry in `config.js`:
 
 ### Simple example with wordpairs
 
-**Spanish - new wordpair every 12 hours**
+**Spanish - new wordpair every 12 hours with hidden header**
 
 ```js
   {
@@ -45,7 +46,8 @@ Here are two examples for an entry in `config.js`:
       language: "spanish",
       nextWordInterval: 12*60*60*1000,
       showpair: "showboth",
-      wordpaircssclassname: "bright medium"
+      wordpaircssclassname: "bright medium",
+      showHeader: false
     }
   },
 ```
