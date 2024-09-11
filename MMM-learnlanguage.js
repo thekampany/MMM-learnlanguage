@@ -9,7 +9,8 @@ Module.register("MMM-learnlanguage", {
     nextWordInterval: 12 * 60 * 60 * 1000, // interval to switch to wordpair
     showpair: "alternating", // alternating or showboth
     toggleInterval: 10 * 1000, // if "alternating" toggle time between own language word and foreign language word
-    wordpaircssclassname: "bright large"
+    wordpaircssclassname: "bright large",
+    showHeader: true
   },
 
   // Define required translations.
@@ -113,8 +114,10 @@ Module.register("MMM-learnlanguage", {
   },
 
   getHeader() {
-    return this.translate(
-      `${this.translate("LEARN")} ${this.translate(this.config.language)}`
-    );
+    if (this.config.showHeader) {
+      return this.translate(
+        `${this.translate("LEARN")} ${this.translate(this.config.language)}`
+      );
+    }
   }
 });
